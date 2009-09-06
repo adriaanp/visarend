@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Visarend.Core", "Visarend.Core\Visarend.Core.vbproj", "{3DC6CF55-8938-4A4C-AE5B-ECED2653F700}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Visarend.Wpf", "Visarend.Wpf\Visarend.Wpf.vbproj", "{3C49F5E8-95C8-47C9-AEFE-6759AF90C53B}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DC6CF55-8938-4A4C-AE5B-ECED2653F700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC6CF55-8938-4A4C-AE5B-ECED2653F700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC6CF55-8938-4A4C-AE5B-ECED2653F700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC6CF55-8938-4A4C-AE5B-ECED2653F700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C49F5E8-95C8-47C9-AEFE-6759AF90C53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C49F5E8-95C8-47C9-AEFE-6759AF90C53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C49F5E8-95C8-47C9-AEFE-6759AF90C53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C49F5E8-95C8-47C9-AEFE-6759AF90C53B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
