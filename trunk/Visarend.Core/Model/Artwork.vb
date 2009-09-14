@@ -59,6 +59,10 @@ Namespace Model
             End Set
         End Property
 
+        Friend Sub LoadImage()
+            _image = LoadImage(Uri)
+        End Sub
+
         Private Function LoadImage(ByVal uri As String) As Image
             Dim stream As New MemoryStream
             Dim web As New WebClient

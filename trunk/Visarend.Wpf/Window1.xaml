@@ -17,11 +17,12 @@
 			
         </Grid.RowDefinitions>
 		<StackPanel Grid.Column="0" Grid.RowSpan="3" >
-			<ListBox x:Name="ListBox" Grid.Column="0" Grid.Row="0"  MinWidth="200" MinHeight="400" SelectionChanged="ListBox_SelectionChanged" DisplayMemberPath="MovieInfo.Name"/>
+			<ListBox x:Name="ListBox" Grid.Column="0" Grid.Row="0"  MinWidth="200" MinHeight="400" SelectionChanged="ListBox_SelectionChanged" DisplayMemberPath="MovieFileName"/>
 			<StackPanel Orientation="Horizontal">
 				<TextBox x:Name="folderTextBox">C:\Tmp\Moviez</TextBox>
 				<Button Click="Button_Click">Scan Directory</Button>
 			</StackPanel>
+            <Button Grid.Column="0" x:Name="btnGetInfo" Click="btnGetInfo_Click">Get Info</Button>
 		</StackPanel>
 		<Image x:Name="backDropImage" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0.295" />
 		<TextBlock Grid.Column="1" Grid.Row="0">Movie:</TextBlock>
@@ -29,5 +30,6 @@
 		<TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Path=Name}"/>
 		<TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Path=Overview}" TextWrapping="Wrap"/>
 		<Image x:Name="posterImage" Grid.Column="1" Grid.Row="2" Width="300" Height="400"/>    	
+        
     </Grid>
 </Window>
