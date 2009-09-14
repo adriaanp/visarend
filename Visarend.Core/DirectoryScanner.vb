@@ -1,6 +1,7 @@
 ﻿Imports Visarend.Core.Model
 Imports System.IO
 Imports Visarend.Core.Data
+Imports Visarend.Core.Source
 
 ''' <summary>
 ''' Scans directory for all movies... and maybe bring back directory and file
@@ -13,8 +14,8 @@ Imports Visarend.Core.Data
 ''' </remarks>
 Public Class DirectoryScanner
 
-    Private _movieNameFinder As IMovieNameFinder = New DefaultMovieNameFinder()
     Private _persister As IMovieInfoPersister = New MovieInfoPersister()
+    'Private _movieSource As IMovieSource = New TheMovieDbSource()
 
     Public Function ScanDirectory(ByVal folder As String) As List(Of MovieFile)
         Dim movieFiles As New List(Of MovieFile)
@@ -29,31 +30,56 @@ Public Class DirectoryScanner
     End Function
 
     Private Function GetMovieFile(ByVal filename As String) As MovieFile
-        Dim moviefile As New MovieFile
+        Dim moviefile As New MovieFile(filename)
 
-        Dim movieName As String = _movieNameFinder.GetMovieNameFromFileName(filename)
-        If String.IsNullOrEmpty(movieName) Then
+        If String.IsNullOrEmpty(moviefile.MovieNameFromFile) Then
             Return Nothing
         End If
+
         moviefile.FileNames = New String() {filename}
-        moviefile.MovieFileName = filename
 
         moviefile.MovieInfo = GetMovieInfoFromFile(filename)
+        'If moviefile.MovieInfo Is Nothing Then 'try loading it
+        '    'todo: need to load this on seperate thread, or we need to handle it outside this class???
+        '    moviefile.MovieInfo = GetMovieInfoFromSource(moviefile.MovieNameFromFile)
+        '    If moviefile.MovieInfo IsNot Nothing Then
+        '        SaveMovieInfo(moviefile.MovieInfo, filename)
+        '    End If
+        'End If
 
         Return moviefile
     End Function
 
-    Private Function GetMovieInfoFromFile(ByVal filename As String) As MovieInfo
+    Private Function GetMovieInfoXmlFileName(ByVal filename As String) As String
         Dim movieInfoFile = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".xml")
+        Return movieInfoFile
+    End Function
+
+    Private Function GetMovieInfoFromFile(ByVal filename As String) As MovieInfo
+        Dim movieInfoFile As String = GetMovieInfoXmlFileName(filename)
         If Not File.Exists(movieInfoFile) Then
             Return Nothing
         End If
         Return _persister.Load(movieInfoFile)
     End Function
 
+    'Private Function GetMovieInfoFromSource(ByVal movieName As String) As MovieInfo
+    '    Dim info = _movieSource.GetMovie(movieName)
+    '    Return info
+    'End Function
+
+    'Private Sub SaveMovieInfo(ByVal movieInfo As MovieInfo, ByVal filename As String)
+    '    Dim xmlFilename = GetMovieInfoXmlFileName(filename)
+    '    _persister.Save(movieInfo, xmlFilename)
+    'End Sub
+
 End Class
 
 Public Class MovieFile
+
+    Public Sub New(ByVal filename As String)
+        _movieFileName = filename
+    End Sub
 
     Private _fileNames As String()
     Public Property FileNames() As String()
@@ -65,7 +91,6 @@ Public Class MovieFile
         End Set
     End Property
 
-
     Private _movieFileName As String
     Public Property MovieFileName() As String
         Get
@@ -75,6 +100,15 @@ Public Class MovieFile
             _movieFileName = value
         End Set
     End Property
+
+    Private _movieNameFinder As IMovieNameFinder = New DefaultMovieNameFinder()
+
+    Public ReadOnly Property MovieNameFromFile() As String
+        Get
+            Return _movieNameFinder.GetMovieNameFromFileName(MovieFileName)
+        End Get
+    End Property
+
 
     Private _movieInfo As MovieInfo
     Public Property MovieInfo() As MovieInfo

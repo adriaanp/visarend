@@ -69,6 +69,7 @@
     <Compile Include="Model\Artwork.vb" />
     <Compile Include="Model\MovieInfo.vb" />
     <Compile Include="Data\MovieInfoPersister.vb" />
+    <Compile Include="MovieInfoLoader.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

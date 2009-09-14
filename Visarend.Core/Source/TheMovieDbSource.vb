@@ -73,12 +73,14 @@ Namespace Source
                          Order By image.@id _
                          Select New Artwork() With {.Uri = image.@url}
             movie.Poster = poster.FirstOrDefault()
+            If movie.Poster IsNot Nothing Then movie.Poster.LoadImage()
 
             Dim backdrop = From image In movieElement.Descendants("image") _
                          Where image.@type = "backdrop" And image.@size = "original" _
                          Order By image.@id _
                          Select New Artwork() With {.Uri = image.@url}
             movie.Backdrop = backdrop.FirstOrDefault()
+            If movie.Backdrop IsNot Nothing Then movie.Backdrop.LoadImage()
 
             Dim actors = From actor In movieElement.Descendants("person") _
                          Where actor.@job = "Actor" _
